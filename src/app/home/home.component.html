@@ -1,0 +1,27 @@
+<ng-container [formGroup]="searchForm">
+  <select formControlName="categoryIds">
+    <option [value]="null">請選擇</option>
+    <option [value]="item.id" *ngFor="let item of  category|async">{{item.name}}</option>
+  </select>
+
+</ng-container>
+<button (click)="savelocal()">存到我的最愛</button>
+
+
+<pre>
+  {{searchForm.value|json}}
+</pre>
+
+<div *ngFor="let item of attraction">
+  <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
+  {{item.name}}
+</div>
+<div class="page-normal">
+  <a (click)="togglePage(searchForm.get('page').value-1)"
+    [ngClass]="{'page-prev':searchForm.get('page').value==1 }">&lt;</a>
+  <!-- 數字1 代表當前頁面-->
+  <a (click)="togglePage(num+1)" *ngFor=" let num of total" [ngClass]="{'page-current' : pageCheck(num) }">
+    {{num+1}}</a>
+  <a (click)="togglePage(searchForm.get('page').value+1)"
+    [ngClass]="{'page-prev':searchForm.get('page').value-1==total[total.length-1] }">&gt;</a>
+</div>

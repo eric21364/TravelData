@@ -1,0 +1,6 @@
+<p>favourite works!</p>
+<button (click)="removelocal()">移除我的最愛</button>
+<div *ngFor="let item of attraction">
+  <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
+  {{item.name}}
+</div>

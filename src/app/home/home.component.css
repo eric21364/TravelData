@@ -1,0 +1,41 @@
+/*設定 a 標籤的css樣式*/
+.page-normal a {
+  border: 1px solid #ff6500;
+  padding: 5px 7px;
+  color: #ff6500;
+  margin-left: 20px;
+  /*設定標籤 a 之間的間隔*/
+  text-decoration: none;
+  /*去除頁碼數字下面的下劃線*/
+}
+
+/*設定滑鼠經過時 a 標籤的css樣式*/
+.page-normal a:hover {
+  background-color: #ffbe94;
+}
+
+/*設定整個div的css樣式,該樣式主要用於設定網頁內的省略號 …… 的樣式，並且同時設定內容居中顯示*/
+.page-normal {
+  color: #ff6500;
+  text-align: center;
+}
+
+/*設定當前頁面的css樣式*/
+.page-normal .page-current {
+  color: #ffffff;
+  background-color: #ff6500;
+}
+
+/*設定左單括號 < 的css樣式*/
+.page-normal .page-prev {
+  color: #ffe3c6;
+}
+
+/*進行程式碼優化，將不同css樣式中共有的屬性放在一起，有助於提高執行效率*/
+.page-normal a,
+.page-normal a:hover,
+.page-normal .page-prev,
+.page-normal .page-current {
+  border: 1px solid #ff6500;
+  padding: 5px 7px;
+}
