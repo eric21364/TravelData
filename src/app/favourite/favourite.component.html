@@ -1,4 +1,6 @@
 <p>favourite works!</p>
+
+<a [routerLink]="['/home']" routerLinkActive="router-link-active">資料列表</a>
 <button (click)="removelocal()">移除我的最愛</button>
 <div *ngFor="let item of attraction">
   <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>

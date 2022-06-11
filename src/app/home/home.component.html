@@ -7,7 +7,7 @@
 </ng-container>
 <button (click)="savelocal()">存到我的最愛</button>
 
-
+<a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a>
 <pre>
   {{searchForm.value|json}}
 </pre>
