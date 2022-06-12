@@ -8,12 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FavouriteComponent } from './favourite/favourite.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FavouriteComponent
+    FavouriteComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

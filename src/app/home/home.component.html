@@ -3,7 +3,7 @@
   <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
 </ul>
 <p></p>
-<div class="col-4">
+<div class="col-8">
   <ng-container [formGroup]="searchForm">
     <select formControlName="categoryIds">
       <option [value]="null">請選擇</option>
@@ -11,14 +11,30 @@
     </select>
 
   </ng-container>
+
   <button (click)="savelocal()">存到我的最愛</button>
 
-  <div class="col-12" *ngFor="let item of attraction">
-    <span>
-      <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
-      <label (click)="detail(item.id)">{{item.name}}</label>
-    </span>
+  <div class="col-12" style="display: flex;align-items: center; " *ngFor="let item of attraction">
+    <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
+    <div id="LeftCol" class="col-11">
+      <div id="IDXNews" class="MainList">
+        <div class="mask">
+          <div class="item_block">
+            <a (click)="detail(item.id)">
+              <div *ngIf="item.images.length>0" class="item_img" style="background-image:url({{item.images[0].src}})">
+              </div>
+              <div class="item_txt">
+                <div class="item_topic dotdotdot">{{item.name}}</div>
+                <div class="item_desc dotdotdot">{{item.introduction}}
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <p></p>
   <div class="page-normal col-12" *ngIf="total.length >0">
     <a (click)="togglePage(searchForm.get('page').value-1)"
@@ -28,24 +44,5 @@
       {{num+1}} </a>
     <a (click)="togglePage(searchForm.get('page').value+1)"
       [ngClass]="{'page-prev':searchForm.get('page').value-1==total[total.length-1] }">&gt;</a>
-  </div>
-</div>
-<div class="col-8" *ngIf="detailData != null"
-  style="border-width:3px;border-style:dashed;border-color:#FFAC55;padding:5px;">
-  <h4>名字</h4>
-  <h5>{{detailData.name}}</h5>
-  <h4>地址</h4>
-  <h5>{{detailData.address}}</h5>
-  <h4>簡介</h4>
-  <h5>{{detailData.introduction}}</h5>
-  <h4 *ngIf="detailData.images.length !==0">圖片</h4>
-  <div *ngIf="detailData.images.length !==0" class="rwd_slider_container_wrapper">
-    <div class="rwd_slider_container">
-      <div class="slider_container">
-        <div *ngFor="let img of detailData.images">
-          <img src="{{img.src}}" width="400" height="280">
-        </div>
-      </div>
-    </div>
   </div>
 </div>

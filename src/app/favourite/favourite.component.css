@@ -1,0 +1,104 @@
+#LeftCol .MainList .item_img {
+  width: 280px;
+  height: 160px;
+  float: left;
+}
+
+#LeftCol .MainList .item_block a {
+  color: #717171;
+  text-decoration: none;
+}
+
+#LeftCol .MainList .item_img {
+  width: 280px;
+  height: 160px;
+  float: left;
+}
+
+.item_img {
+  display: block;
+  position: relative;
+  background: no-repeat top center #41b7e3;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#LeftCol .MainList .item_txt {
+  margin-left: 300px;
+  position: relative;
+  height: 160px;
+}
+
+#LeftCol .MainList .item_block a {
+  color: #717171;
+  text-decoration: none;
+}
+
+#LeftCol .MainList .item_topic {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 28px;
+  max-height: 56px;
+  overflow: hidden;
+  padding-bottom: 4px;
+  color: #000;
+}
+
+#LeftCol .MainList .item_desc {
+  font-size: 16px;
+  line-height: 28px;
+  max-height: 56px;
+  color: #717171;
+  overflow: hidden;
+}
+
+#LeftCol .MainList .item_auth {
+  position: absolute;
+  font-size: 16px;
+  color: #717171;
+  line-height: 16px;
+  left: 0;
+  bottom: 0;
+}
+
+#LeftCol .MainList .item_block:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#RightCol>div:first-child,
+#LeftCol>div:first-child,
+.index-page #LeftCol>div:first-child {
+  margin: 0;
+}
+
+#RightCol>div,
+#LeftCol>div {
+  margin-top: 20px;
+}
+
+#posts .deco #LeftCol {
+  width: 910px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 60px;
+}
+
+#posts .deco #RightCol {
+  width: 300px;
+  float: right;
+  position: relative;
+  z-index: 1;
+  padding-bottom: 20px;
+  -webkit-transition: translateZ(0px);
+  -o-transition: translateZ(0px);
+  transition: translateZ(0px);
+  transform: translate3d(0px, 0px, 0px);
+}
+
+#posts .deco {
+  width: 1260px;
+  margin: 0 auto;
+}

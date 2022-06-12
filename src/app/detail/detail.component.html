@@ -1,0 +1,24 @@
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
+</ul>
+
+<div class="col-8" *ngIf="detailData != null"
+  style="border-width:3px;border-style:dashed;border-color:#FFAC55;padding:5px;">
+  <h4>名字</h4>
+  <h5>{{detailData.name}}</h5>
+  <h4>地址</h4>
+  <h5>{{detailData.address}}</h5>
+  <h4>簡介</h4>
+  <p>{{detailData.introduction}}</p>
+  <h4 *ngIf="detailData.images.length !==0">圖片</h4>
+  <div *ngIf="detailData.images.length !==0" class="rwd_slider_container_wrapper">
+    <div class="rwd_slider_container">
+      <div class="slider_container">
+        <div *ngFor="let img of detailData.images">
+          <img src="{{img.src}}" width="400" height="280">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

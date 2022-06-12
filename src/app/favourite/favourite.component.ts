@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Attraction } from '../model/attraction';
 @Component({
@@ -8,8 +8,10 @@ import { Attraction } from '../model/attraction';
 })
 export class FavouriteComponent implements OnInit {
   attraction: Attraction[] = [];
-  checkboxList = [];
+  checkboxList: Attraction[] = [];
+  detailData: Attraction;
   favourite = [];
+  private previewWindow: Window;
   constructor() { }
   saveForm: FormGroup = new FormGroup({
     changeId: new FormControl(null, Validators.required),
@@ -20,24 +22,19 @@ export class FavouriteComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('favourite') !== null) {
-      localStorage.getItem('favourite').split(',').forEach(element => {
-        let favourite = element.split(' ');
-        this.attraction.push({ id: parseInt(favourite[0]), name: favourite[1] });
-      });
+      this.attraction = JSON.parse(localStorage.getItem('favourite'));
+
     }
   }
   removelocal() {
     this.checkboxList.forEach(x => {
       this.attraction.splice(this.attraction.findIndex(y => y.id == x), 1);
     });
-    this.attraction.forEach(x => {
-      this.favourite.push(x.id + ' ' + x.name);
-    });
+
     localStorage.removeItem('favourite');
-    localStorage.setItem('favourite', this.favourite.join(','));
+    localStorage.setItem('favourite', JSON.stringify(this.attraction));
   }
   clickAttraction(item) {
-    console.log(item)
     this.checkboxList.push(item.id);
   }
   change(id) {
@@ -53,7 +50,31 @@ export class FavouriteComponent implements OnInit {
       this.favourite.push(x.id + ' ' + x.name);
     });
     localStorage.removeItem('favourite');
-    localStorage.setItem('favourite', this.favourite.join(','));
+    localStorage.setItem('favourite', JSON.stringify(this.attraction));
     this.changeId.setValue(null);
+  }
+
+  @HostListener('window:message', ['$event'])
+  onMessage(event: MessageEvent): void {
+
+    // 子視窗通知準備完成
+    if (event.data === 'isReady') {
+
+      const foo = {
+        type: 'preview',
+        data: this.detailData
+      };
+
+      this.previewWindow.postMessage(foo, '*');
+    }
+  }
+  detail(id) {
+    this.detailData = this.attraction[this.attraction.findIndex(x => x.id == id)]
+    this.openWindow();
+  }
+
+  openWindow() {
+    // 開啟目標視窗，如視窗未完成開啟前即執行 postMessage() 會傳送無效
+    this.previewWindow = window.open('detail', '_blank');
   }
 }

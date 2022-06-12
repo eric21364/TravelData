@@ -15,8 +15,26 @@
   </div>
 </ng-container>
 <p></p>
-<div *ngFor="let item of attraction">
+
+
+<div class="col-12" style="display: flex;align-items: center; " *ngFor="let item of attraction">
   <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
-  {{item.name}}
-  <input type="button" (click)="change(item.id)" name="" id="" value="編輯">
+  <div id="LeftCol" class="col-11">
+    <div id="IDXNews" class="MainList">
+      <div class="mask">
+        <div class="item_block">
+          <a (click)="detail(item.id)">
+            <div *ngIf="item.images.length>0" class="item_img" style="background-image:url({{item.images[0].src}})">
+            </div>
+            <div class="item_txt">
+              <div class="item_topic dotdotdot">{{item.name}}</div>
+              <div class="item_desc dotdotdot">{{item.introduction}}
+              </div>
+            </div>
+          </a>
+        </div>
+        <input type="button" (click)="change(item.id)" name="" id="" value="編輯">
+      </div>
+    </div>
+  </div>
 </div>
