@@ -3,7 +3,7 @@
   <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
 </ul>
 <p></p>
-<div class="col-8">
+<div class="col-12">
   <ng-container [formGroup]="searchForm">
     <select formControlName="categoryIds">
       <option [value]="null">請選擇</option>
@@ -14,7 +14,7 @@
 
   <button (click)="savelocal()">存到我的最愛</button>
 
-  <div class="col-12" style="display: flex;align-items: center; " *ngFor="let item of attraction">
+  <div class="col-12 divBorder" style="display: flex;align-items: center; " *ngFor="let item of attraction">
     <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
     <div id="LeftCol" class="col-11">
       <div id="IDXNews" class="MainList">
