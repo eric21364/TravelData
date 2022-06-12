@@ -19,11 +19,12 @@ export class FavouriteComponent implements OnInit {
   get changeData() { return this.saveForm.get('changeData') as FormControl }
 
   ngOnInit(): void {
-    localStorage.getItem('favourite').split(',').forEach(element => {
-      let favourite = element.split(' ');
-      this.attraction.push({ id: parseInt(favourite[0]), name: favourite[1] });
-    });
-    this.attraction.sort(x => x.id);
+    if (localStorage.getItem('favourite') !== null) {
+      localStorage.getItem('favourite').split(',').forEach(element => {
+        let favourite = element.split(' ');
+        this.attraction.push({ id: parseInt(favourite[0]), name: favourite[1] });
+      });
+    }
   }
   removelocal() {
     this.checkboxList.forEach(x => {
@@ -53,5 +54,6 @@ export class FavouriteComponent implements OnInit {
     });
     localStorage.removeItem('favourite');
     localStorage.setItem('favourite', this.favourite.join(','));
+    this.changeId.setValue(null);
   }
 }

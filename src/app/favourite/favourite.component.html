@@ -1,9 +1,11 @@
-<p>favourite works!</p>
-
-<a [routerLink]="['/home']" routerLinkActive="router-link-active">資料列表</a>
+<ul>
+  <li><a [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a></li>
+  <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
+</ul>
+<p></p>
 <button (click)="removelocal()">移除我的最愛</button>
 <br>
-<ng-container [formGroup]="saveForm">
+<ng-container *ngIf="saveForm.get('changeId').value!=null" [formGroup]="saveForm">
   <div>
     <label>修改名稱</label>
     <input type="hidden" formControlName="changeId">
@@ -12,6 +14,7 @@
 
   </div>
 </ng-container>
+<p></p>
 <div *ngFor="let item of attraction">
   <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
   {{item.name}}

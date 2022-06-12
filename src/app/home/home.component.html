@@ -1,27 +1,51 @@
-<ng-container [formGroup]="searchForm">
-  <select formControlName="categoryIds">
-    <option [value]="null">請選擇</option>
-    <option [value]="item.id" *ngFor="let item of  category|async">{{item.name}}</option>
-  </select>
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
+</ul>
+<p></p>
+<div class="col-4">
+  <ng-container [formGroup]="searchForm">
+    <select formControlName="categoryIds">
+      <option [value]="null">請選擇</option>
+      <option [value]="item.id" *ngFor="let item of  category|async">{{item.name}}</option>
+    </select>
 
-</ng-container>
-<button (click)="savelocal()">存到我的最愛</button>
+  </ng-container>
+  <button (click)="savelocal()">存到我的最愛</button>
 
-<a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a>
-<pre>
-  {{searchForm.value|json}}
-</pre>
-
-<div *ngFor="let item of attraction">
-  <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
-  {{item.name}}
+  <div class="col-12" *ngFor="let item of attraction">
+    <span>
+      <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
+      <label (click)="detail(item.id)">{{item.name}}</label>
+    </span>
+  </div>
+  <p></p>
+  <div class="page-normal col-12" *ngIf="total.length >0">
+    <a (click)="togglePage(searchForm.get('page').value-1)"
+      [ngClass]="{'page-prev':searchForm.get('page').value==1 }">&lt;</a>
+    <!-- 數字1 代表當前頁面-->
+    <a (click)="togglePage(num+1)" *ngFor=" let num of total" [ngClass]="{'page-current' : pageCheck(num) }">
+      {{num+1}} </a>
+    <a (click)="togglePage(searchForm.get('page').value+1)"
+      [ngClass]="{'page-prev':searchForm.get('page').value-1==total[total.length-1] }">&gt;</a>
+  </div>
 </div>
-<div class="page-normal">
-  <a (click)="togglePage(searchForm.get('page').value-1)"
-    [ngClass]="{'page-prev':searchForm.get('page').value==1 }">&lt;</a>
-  <!-- 數字1 代表當前頁面-->
-  <a (click)="togglePage(num+1)" *ngFor=" let num of total" [ngClass]="{'page-current' : pageCheck(num) }">
-    {{num+1}}</a>
-  <a (click)="togglePage(searchForm.get('page').value+1)"
-    [ngClass]="{'page-prev':searchForm.get('page').value-1==total[total.length-1] }">&gt;</a>
+<div class="col-8" *ngIf="detailData != null"
+  style="border-width:3px;border-style:dashed;border-color:#FFAC55;padding:5px;">
+  <h4>名字</h4>
+  <h5>{{detailData.name}}</h5>
+  <h4>地址</h4>
+  <h5>{{detailData.address}}</h5>
+  <h4>簡介</h4>
+  <h5>{{detailData.introduction}}</h5>
+  <h4>圖片</h4>
+  <div *ngIf="detailData.images.length !==0" class="rwd_slider_container_wrapper">
+    <div class="rwd_slider_container">
+      <div class="slider_container">
+        <div *ngFor="let img of detailData.images">
+          <img src="{{img.src}}" width="400" height="280">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

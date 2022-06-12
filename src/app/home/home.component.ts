@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   category: Observable<Category[]> = this.appService.getAttractionType();
   total = [];
   checkboxList = [];
+  detailData: Attraction;
   searchForm: FormGroup = new FormGroup({
     page: new FormControl(1),
     categoryIds: new FormControl(null, Validators.required),
@@ -36,10 +37,12 @@ export class HomeComponent implements OnInit {
       this.categoryIds.reset(x, { emitEvent: false })
       this.getAttractionData();
     })
-    localStorage.getItem('favourite').split(',').forEach(element => {
-      let favourite = element.split(' ');
-      this.checkboxList.push(parseInt(favourite[0]) + ' ' + favourite[1]);
-    });
+    if (localStorage.getItem('favourite') != null) {
+      localStorage.getItem('favourite').split(',').forEach(element => {
+        let favourite = element.split(' ');
+        this.checkboxList.push(parseInt(favourite[0]) + ' ' + favourite[1]);
+      });
+    }
   }
 
   getAttractionData() {
@@ -65,5 +68,9 @@ export class HomeComponent implements OnInit {
   clickAttraction(item) {
     console.log(item)
     this.checkboxList.push(item.id + ' ' + item.name);
+  }
+
+  detail(id) {
+    this.detailData = this.attraction[this.attraction.findIndex(x => x.id == id)]
   }
 }
