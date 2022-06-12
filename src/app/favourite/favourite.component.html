@@ -2,7 +2,18 @@
 
 <a [routerLink]="['/home']" routerLinkActive="router-link-active">資料列表</a>
 <button (click)="removelocal()">移除我的最愛</button>
+<br>
+<ng-container [formGroup]="saveForm">
+  <div>
+    <label>修改名稱</label>
+    <input type="hidden" formControlName="changeId">
+    <input type="text" formControlName="changeData">
+    <input type="button" (click)="save()" value="儲存">
+
+  </div>
+</ng-container>
 <div *ngFor="let item of attraction">
   <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>
   {{item.name}}
+  <input type="button" (click)="change(item.id)" name="" id="" value="編輯">
 </div>

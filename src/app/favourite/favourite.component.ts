@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Attraction } from '../model/attraction';
 @Component({
   selector: 'app-favourite',
@@ -8,8 +9,14 @@ import { Attraction } from '../model/attraction';
 export class FavouriteComponent implements OnInit {
   attraction: Attraction[] = [];
   checkboxList = [];
-  favoutite = [];
+  favourite = [];
   constructor() { }
+  saveForm: FormGroup = new FormGroup({
+    changeId: new FormControl(null, Validators.required),
+    changeData: new FormControl(null, Validators.required)
+  })
+  get changeId() { return this.saveForm.get('changeId') as FormControl }
+  get changeData() { return this.saveForm.get('changeData') as FormControl }
 
   ngOnInit(): void {
     localStorage.getItem('favourite').split(',').forEach(element => {
@@ -23,14 +30,28 @@ export class FavouriteComponent implements OnInit {
       this.attraction.splice(this.attraction.findIndex(y => y.id == x), 1);
     });
     this.attraction.forEach(x => {
-      this.favoutite.push(x.id + ' ' + x.name);
+      this.favourite.push(x.id + ' ' + x.name);
     });
     localStorage.removeItem('favourite');
-    localStorage.setItem('favourite', this.favoutite.join(','));
+    localStorage.setItem('favourite', this.favourite.join(','));
   }
   clickAttraction(item) {
     console.log(item)
     this.checkboxList.push(item.id);
   }
-
+  change(id) {
+    this.changeId.setValue(id);
+    this.changeData.setValue(this.attraction[this.attraction.findIndex(y => y.id == id)].name);
+  }
+  save() {
+    if (this.saveForm.invalid) {
+      return
+    }
+    this.attraction[this.attraction.findIndex(y => y.id == this.saveForm.get('changeId').value)].name = this.saveForm.get('changeData').value;
+    this.attraction.forEach(x => {
+      this.favourite.push(x.id + ' ' + x.name);
+    });
+    localStorage.removeItem('favourite');
+    localStorage.setItem('favourite', this.favourite.join(','));
+  }
 }

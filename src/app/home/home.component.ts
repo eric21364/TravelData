@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
       this.categoryIds.reset(x, { emitEvent: false })
       this.getAttractionData();
     })
+    localStorage.getItem('favourite').split(',').forEach(element => {
+      let favourite = element.split(' ');
+      this.checkboxList.push(parseInt(favourite[0]) + ' ' + favourite[1]);
+    });
   }
 
   getAttractionData() {
