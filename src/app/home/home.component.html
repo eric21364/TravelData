@@ -4,15 +4,14 @@
 </ul>
 <p></p>
 <div class="col-12">
-  <ng-container [formGroup]="searchForm">
+  <ng-container class="menu" [formGroup]="searchForm">
     <select formControlName="categoryIds">
       <option [value]="null">請選擇</option>
       <option [value]="item.id" *ngFor="let item of  category|async">{{item.name}}</option>
     </select>
-
   </ng-container>
 
-  <button (click)="savelocal()">存到我的最愛</button>
+  <button class="btn" (click)="savelocal()">存到我的最愛</button>
 
   <div class="col-12 divBorder" style="display: flex;align-items: center; " *ngFor="let item of attraction">
     <input type="checkbox" (click)="clickAttraction(item)" id={{item.id}}>

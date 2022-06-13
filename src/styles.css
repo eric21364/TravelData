@@ -346,3 +346,41 @@ table {
   border-color: #97928c;
   padding: 5px;
 }
+
+.btn {
+  border: 0;
+  background-color: #003C9D;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: #003C9D;
+  background-color: #fff;
+  border: 2px #003C9D solid;
+}
+
+input[type="text"] {
+  padding: 5px 15px;
+  border: 2px black solid;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.menu select {
+  background: transparent;
+
+  font-size: 14px;
+  border: 1px solid #eee;
+
+}
+
+.menu {
+  margin-top: 1%;
+  width: auto;
+  border: 2px solid black;
+  overflow: hidden;
+
+}

@@ -3,14 +3,14 @@
   <li><a [routerLink]="['/favourite']" routerLinkActive="router-link-active">我的最愛</a></li>
 </ul>
 <p></p>
-<button (click)="removelocal()">移除我的最愛</button>
+<button class="btn" (click)="removelocal()">移除我的最愛</button>
 <br>
 <ng-container *ngIf="saveForm.get('changeId').value!=null" [formGroup]="saveForm">
   <div>
     <label>修改名稱</label>
     <input type="hidden" formControlName="changeId">
-    <input type="text" formControlName="changeData">
-    <input type="button" (click)="save()" value="儲存">
+    <input style="margin: 1%;" type="text" formControlName="changeData">
+    <input type="button" class="btn" (click)="save()" value="儲存">
 
   </div>
 </ng-container>
