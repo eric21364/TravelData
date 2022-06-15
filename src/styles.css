@@ -349,16 +349,16 @@ table {
 
 .btn {
   border: 0;
-  background-color: #003C9D;
+  background-color: #56c0bc;
   color: #fff;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .btn:hover {
-  color: #003C9D;
+  color: #56c0bc;
   background-color: #fff;
-  border: 2px #003C9D solid;
+  border: 2px #56c0bc solid;
 }
 
 input[type="text"] {
